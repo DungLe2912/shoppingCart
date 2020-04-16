@@ -27,8 +27,8 @@ var initialState=[
         ratting:3,
     },
 ];
-const products=(state=initialState,actions)=>{
-    switch(actions.type){
+const products=(state=initialState,action)=>{
+    switch(action.type){
         default: return [...state];
     }
 }
