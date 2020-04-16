@@ -1,5 +1,5 @@
 import React from 'react';
-import Products from './components/Products';
+import ProductsContainer from './containers/ProductsContainer';
 import Header from './components/Header';
 import Footer from './components/Footer';
 import Message from './components/message';
@@ -12,7 +12,7 @@ function App() {
       <main id="mainContainer">
         <div className="container">
           {/* Products */}
-          <Products />
+          <ProductsContainer />
           {/* Message */}
           <Message />
           {/* Cart */}
