@@ -45,7 +45,7 @@ class Product extends Component {
                             <span className="left">{this.props.product.price}$</span>
                             <span className="right">
                                 <a className="btn-floating blue-gradient" data-toggle="tooltip" data-placement="top" data-original-title="Add to Cart">
-                                    <i className="fa fa-shopping-cart" />
+                                    <i className="fa fa-shopping-cart" onClick={()=>this.onAddToCart(this.props.product)}/>
                                 </a>
                             </span>
                         </div>
@@ -53,6 +53,9 @@ class Product extends Component {
                 </div>
             </div>
         );
+    }
+    onAddToCart=(product)=>{
+        this.props.onAddToCart(product);
     }
 }
 

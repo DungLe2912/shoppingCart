@@ -7,6 +7,7 @@ var initialState=[
         price: 500,
         inventory:15,
         ratting: 4,
+       
     },
     {
         id: 2,
@@ -16,6 +17,7 @@ var initialState=[
         price: 700,
         inventory:10,
         ratting:5,
+       
     },
     {
         id: 3,
@@ -25,6 +27,7 @@ var initialState=[
         price: 100,
         inventory:12,
         ratting:3,
+      
     },
 ];
 const products=(state=initialState,action)=>{

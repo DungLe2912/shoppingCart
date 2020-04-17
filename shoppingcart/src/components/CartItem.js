@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 class CartItem extends Component {
     render() {
       var{item}=this.props;
+     // console.log(item.product);
         return (
             <tr>
             <th scope="row">
@@ -22,7 +23,7 @@ class CartItem extends Component {
                   <a>—</a>
                 </label>
                 <label className="btn btn-sm btn-primary
-                                  btn-rounded waves-effect waves-light">
+                                  btn-rounded waves-effect waves-light" onClick={()=>this.increaseQuantity(item)}>
                   <a>+</a>
                 </label>
               </div>
@@ -39,6 +40,9 @@ class CartItem extends Component {
     }
     showTotal=(price,quantity)=>{
       return price*quantity;
+    }
+    increaseQuantity=(product)=>{
+      this.props.increaseQuantity(product);
     }
 }
 

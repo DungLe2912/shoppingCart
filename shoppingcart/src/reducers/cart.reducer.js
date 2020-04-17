@@ -1,23 +1,65 @@
 import * as types from '../constants/ActionTypes';
-var data=JSON.parse(localStorage.getItem('CART'));
-var initialState=[
-   {
-   product: {
-        id: 1,
-        name:'Iphone 7 Plus',
-        image:'https://store.storeimages.cdn-apple.com/4974/as-images.apple.com/is/image/AppleInc/aos/published/images/H/H0/HH0H2/HH0H2?wid=445&hei=445&fmt=jpeg&qlt=95&op_sharpen=0&resMode=bicub&op_usm=0.5,0.5,0,0&iccEmbed=0&layer=comp&.v=K7ik72',
-        description:'Apple',
-        price: 500,
-        inventory:15,
-        ratting: 4,
-    },
-    quantity:5
-   }
-]
-const cart=(state=initialState,action)=>{
-    switch(action.type){
+var data = JSON.parse(localStorage.getItem('CART'));
+var initialState = data ? data : [];
+
+var findIndex = (id, products) => {
+
+    var result = -1;
+    products.forEach((product, index) => {
+        if (product.product.id === id) {
+            result = index;
+        }
+    });
+    return result;
+}
+const cart = (state = initialState, action) => {
+    switch (action.type) {
         case types.ADD_TO_CART:
-            console(action);
+            var { product, quantity } = action;
+            //    console.log(product);
+            var index = findIndex(product.id, state);
+            console.log(index);
+            if (index === -1) {
+                var newProduct = {
+                    product: {
+                        id: product.id,
+                        name: product.name,
+                        image: product.image,
+                        description: product.description,
+                        price: product.price,
+                        inventory: product.inventory,
+                        ratting: product.ratting,
+                    },
+                    quantity: quantity
+                };
+                state.push(newProduct);
+            } else {
+                if (state[index].quantity < action.product.inventory) {
+                    state[index] = {
+                        ...state[index],
+                        quantity: state[index].quantity + quantity
+                    };
+                }
+                // console.log(state[index].quantity);
+            }
+
+
+            localStorage.setItem('CART', JSON.stringify(state));
+            return [...state];
+        case types.INCREASE_QUANTITY:
+            
+            var index = findIndex(action.product.product.id, state);
+          
+            if (index !== -1) {
+                if (action.product.quantity < action.product.product.inventory) {
+                    console.log('done');
+                    state[index] = {
+                        ...state[index],
+                        quantity: state[index].quantity + 1
+                    };
+                }
+            }
+            localStorage.setItem('CART', JSON.stringify(state));
             return [...state];
         default: return [...state];
     }
