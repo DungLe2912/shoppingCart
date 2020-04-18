@@ -26,6 +26,8 @@ class CartContainer extends Component {
                     <CartItem key={index}
                         item={item}
                         increaseQuantity={this.props.increaseQuantity}
+                        decreaseQuantity={this.props.decreaseQuantity}
+                        deleteCartItem={this.props.deleteCartItem}
                     ></CartItem>
                 )
             })
@@ -53,7 +55,12 @@ const mapDispatchToProps = (dispatch, props) => {
         increaseQuantity:(product)=>{
             dispatch(actions.increaseQuantity(product))
         },
-
+        decreaseQuantity:(product)=>{
+            dispatch(actions.decreaseQuantity(product))
+        },
+        deleteCartItem:(product)=>{
+            dispatch(actions.deleteCartItem(product))
+        }
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(CartContainer);

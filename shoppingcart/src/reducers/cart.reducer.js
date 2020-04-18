@@ -18,7 +18,7 @@ const cart = (state = initialState, action) => {
             var { product, quantity } = action;
             //    console.log(product);
             var index = findIndex(product.id, state);
-            console.log(index);
+           // console.log(index);
             if (index === -1) {
                 var newProduct = {
                     product: {
@@ -47,12 +47,12 @@ const cart = (state = initialState, action) => {
             localStorage.setItem('CART', JSON.stringify(state));
             return [...state];
         case types.INCREASE_QUANTITY:
-            
+
             var index = findIndex(action.product.product.id, state);
-          
+
             if (index !== -1) {
                 if (action.product.quantity < action.product.product.inventory) {
-                    console.log('done');
+                    // console.log('done');
                     state[index] = {
                         ...state[index],
                         quantity: state[index].quantity + 1
@@ -60,6 +60,27 @@ const cart = (state = initialState, action) => {
                 }
             }
             localStorage.setItem('CART', JSON.stringify(state));
+            return [...state];
+        case types.DECREASE_QUANTITY:
+            var index = findIndex(action.product.product.id, state);
+
+            if (index !== -1) {
+                if (action.product.quantity > 0) {
+                    //console.log('done');
+                    state[index] = {
+                        ...state[index],
+                        quantity: state[index].quantity - 1
+                    };
+                }
+            }
+            localStorage.setItem('CART', JSON.stringify(state));
+            return [...state];
+        case types.DELETE_CART_ITEM:
+            var index = findIndex(action.product.product.id, state);
+            if (index !== -1) {
+                state.splice(index, 1);
+                localStorage.setItem('CART', JSON.stringify(state));
+            }
             return [...state];
         default: return [...state];
     }

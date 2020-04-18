@@ -13,3 +13,21 @@ export const increaseQuantity = (product) => {
         product
     }
 };
+export const decreaseQuantity = (product) => {
+    return {
+        type: types.DECREASE_QUANTITY,
+        product
+    }
+};
+export const deleteCartItem = (product) => {
+    return {
+        type: types.DELETE_CART_ITEM,
+        product
+    }
+};
+export const changeMessage = (typeAction) => {
+    return {
+        type: types.DELETE_CART_ITEM,
+        typeAction
+    }
+};
